@@ -5,6 +5,9 @@ use App\Http\Controllers\Api\Admin\FaqController;
 use App\Http\Controllers\Api\Admin\InvestorRelationController;
 use App\Http\Controllers\Api\Admin\MitraController;
 use App\Http\Controllers\Api\Admin\OurTeamController;
+use App\Http\Controllers\Api\Admin\ProjectController;
+use App\Http\Controllers\Api\Admin\ServiceCategoryController;
+use App\Http\Controllers\Api\Admin\ServiceController;
 use App\Http\Controllers\Api\Admin\SocialController;
 use App\Http\Controllers\Api\Admin\WebSettingsController;
 use Illuminate\Http\Request;
@@ -71,6 +74,30 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/social', [SocialController::class, 'show']);
     Route::post('/social', [SocialController::class, 'createOrUpdate']);
+});
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+    Route::get('/projects', [ProjectController::class, 'index']);
+    Route::get('/projects/{id}', [ProjectController::class, 'show']);
+    Route::post('/projects', [ProjectController::class, 'store']);
+    Route::post('/projects/{id}', [ProjectController::class, 'update']); // pakai POST untuk update (bisa juga PUT)
+    Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
+});
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+    Route::get('/service-categories', [ServiceCategoryController::class, 'index']);
+    Route::get('/service-categories/{id}', [ServiceCategoryController::class, 'show']);
+    Route::post('/service-categories', [ServiceCategoryController::class, 'store']);
+    Route::post('/service-categories/{id}', [ServiceCategoryController::class, 'update']); // bisa juga PUT
+    Route::delete('/service-categories/{id}', [ServiceCategoryController::class, 'destroy']);
+});
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+    Route::get('/services', [ServiceController::class, 'index']);
+    Route::get('/services/{id}', [ServiceController::class, 'show']);
+    Route::post('/services', [ServiceController::class, 'store']);
+    Route::post('/services/{id}', [ServiceController::class, 'update']); // bisa juga PUT
+    Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
 Route::get('/faqs', [WebFaqController::class, 'index']);

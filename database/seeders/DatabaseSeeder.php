@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Faq;
 use App\Models\InvestorRelation;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\WebMetadata;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,6 +20,8 @@ class DatabaseSeeder extends Seeder
     {
         Faq::factory()->count(10)->create();
         InvestorRelation::factory()->count(5)->create();
+        ServiceCategory::factory()->count(5)->create();
+        Service::factory()->count(20)->create();
         $this->call([WebSettingsSeeder::class,
             SocialSeeder::class,
         ]);
