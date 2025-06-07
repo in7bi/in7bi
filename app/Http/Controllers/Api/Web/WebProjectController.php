@@ -7,7 +7,6 @@ use App\Models\Project;
 
 class WebProjectController extends Controller
 {
-    // Tampilkan semua project (bisa difilter atau dipaginasi jika perlu)
     public function index()
     {
         $projects = Project::latest()->get();
@@ -15,7 +14,6 @@ class WebProjectController extends Controller
         return response()->json($projects);
     }
 
-    // Tampilkan detail project berdasarkan ID
     public function show($id)
     {
         $project = Project::find($id);

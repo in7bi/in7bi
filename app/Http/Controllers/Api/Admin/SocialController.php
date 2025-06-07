@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
-    // Create new or update existing social record (anggap hanya 1 record)
     public function createOrUpdate(Request $request)
     {
         $validated = $request->validate([
@@ -18,7 +17,6 @@ class SocialController extends Controller
             'instagram' => 'nullable|url|max:255',
         ]);
 
-        // Ambil record pertama, atau buat baru
         $social = Social::first();
 
         if ($social) {
@@ -30,7 +28,6 @@ class SocialController extends Controller
         return response()->json($social);
     }
 
-    // Optional: method untuk mengambil data social (read)
     public function show()
     {
         $social = Social::first();

@@ -7,7 +7,6 @@ use App\Models\WebSettings;
 
 class ApiWebSettingsController extends Controller
 {
-    // Menampilkan data WebSettings untuk frontend (hanya 1 baris)
     public function index()
     {
         $settings = WebSettings::first();

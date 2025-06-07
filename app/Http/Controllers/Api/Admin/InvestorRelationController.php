@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class InvestorRelationController extends Controller
 {
-    // Tampilkan semua data
     public function index()
     {
         $data = InvestorRelation::all();
@@ -16,7 +15,6 @@ class InvestorRelationController extends Controller
         return response()->json($data);
     }
 
-    // Tampilkan data berdasarkan ID
     public function show($id)
     {
         $item = InvestorRelation::find($id);
@@ -27,7 +25,6 @@ class InvestorRelationController extends Controller
         return response()->json($item);
     }
 
-    // Simpan data baru
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -41,7 +38,6 @@ class InvestorRelationController extends Controller
         return response()->json($item, 201);
     }
 
-    // Update data berdasarkan ID
     public function update(Request $request, $id)
     {
         $item = InvestorRelation::find($id);
@@ -60,7 +56,6 @@ class InvestorRelationController extends Controller
         return response()->json($item);
     }
 
-    // Hapus data berdasarkan ID
     public function destroy($id)
     {
         $item = InvestorRelation::find($id);

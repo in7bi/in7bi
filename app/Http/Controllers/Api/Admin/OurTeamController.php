@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class OurTeamController extends Controller
 {
-    // Menampilkan semua anggota tim
     public function index()
     {
         return response()->json(OurTeam::all());
     }
 
-    // Menampilkan satu anggota tim
     public function show($id)
     {
         $team = OurTeam::find($id);
@@ -26,7 +24,6 @@ class OurTeamController extends Controller
         return response()->json($team);
     }
 
-    // Menyimpan anggota tim baru
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -45,7 +42,6 @@ class OurTeamController extends Controller
         return response()->json($team, 201);
     }
 
-    // Update data anggota tim
     public function update(Request $request, $id)
     {
         $team = OurTeam::find($id);
@@ -72,7 +68,6 @@ class OurTeamController extends Controller
         return response()->json($team);
     }
 
-    // Menghapus anggota tim
     public function destroy($id)
     {
         $team = OurTeam::find($id);

@@ -7,7 +7,6 @@ use App\Models\Social;
 
 class WebSocialController extends Controller
 {
-    // Menampilkan data social (hanya satu record)
     public function index()
     {
         $social = Social::first();

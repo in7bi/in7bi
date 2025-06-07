@@ -35,7 +35,6 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
-    // Faq routes
     Route::get('/faqs', [FaqController::class, 'index']);
     Route::get('/faqs/{id}', [FaqController::class, 'show']);
     Route::post('/faqs', [FaqController::class, 'store']);
@@ -62,7 +61,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/mitra', [MitraController::class, 'index']);
     Route::get('/mitra/{id}', [MitraController::class, 'show']);
     Route::post('/mitra', [MitraController::class, 'store']);
-    Route::post('/mitra/{id}', [MitraController::class, 'update']); // pakai POST jika frontend sulit pakai PUT
+    Route::post('/mitra/{id}', [MitraController::class, 'update']);
     Route::delete('/mitra/{id}', [MitraController::class, 'destroy']);
 });
 
@@ -70,7 +69,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/our-team', [OurTeamController::class, 'index']);
     Route::get('/our-team/{id}', [OurTeamController::class, 'show']);
     Route::post('/our-team', [OurTeamController::class, 'store']);
-    Route::post('/our-team/{id}', [OurTeamController::class, 'update']); // gunakan POST jika PUT sulit di frontend
+    Route::post('/our-team/{id}', [OurTeamController::class, 'update']);
     Route::delete('/our-team/{id}', [OurTeamController::class, 'destroy']);
 });
 
@@ -83,7 +82,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index']);
     Route::get('/projects/{id}', [ProjectController::class, 'show']);
     Route::post('/projects', [ProjectController::class, 'store']);
-    Route::post('/projects/{id}', [ProjectController::class, 'update']); // pakai POST untuk update (bisa juga PUT)
+    Route::post('/projects/{id}', [ProjectController::class, 'update']);
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy']);
 });
 
@@ -91,7 +90,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/service-categories', [ServiceCategoryController::class, 'index']);
     Route::get('/service-categories/{id}', [ServiceCategoryController::class, 'show']);
     Route::post('/service-categories', [ServiceCategoryController::class, 'store']);
-    Route::post('/service-categories/{id}', [ServiceCategoryController::class, 'update']); // bisa juga PUT
+    Route::post('/service-categories/{id}', [ServiceCategoryController::class, 'update']);
     Route::delete('/service-categories/{id}', [ServiceCategoryController::class, 'destroy']);
 });
 
@@ -99,7 +98,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/services/{id}', [ServiceController::class, 'show']);
     Route::post('/services', [ServiceController::class, 'store']);
-    Route::post('/services/{id}', [ServiceController::class, 'update']); // bisa juga PUT
+    Route::post('/services/{id}', [ServiceController::class, 'update']);
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class WebSettingsController extends Controller
 {
-    // Tampilkan data settings (asumsi 1 row)
     public function index()
     {
         $settings = WebSettings::first();
@@ -20,7 +19,6 @@ class WebSettingsController extends Controller
         return response()->json($settings);
     }
 
-    // Simpan data settings baru (biasanya hanya sekali)
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -35,7 +33,6 @@ class WebSettingsController extends Controller
             'address' => 'nullable|string',
         ]);
 
-        // Cek apakah sudah ada data
         if (WebSettings::count() > 0) {
             return response()->json(['message' => 'Settings already exist'], 409);
         }
@@ -45,7 +42,6 @@ class WebSettingsController extends Controller
         return response()->json($settings, 201);
     }
 
-    // Update settings
     public function update(Request $request, $id)
     {
         $settings = WebSettings::find($id);
@@ -71,7 +67,6 @@ class WebSettingsController extends Controller
         return response()->json($settings);
     }
 
-    // Hapus settings (jika diperlukan)
     public function destroy($id)
     {
         $settings = WebSettings::find($id);

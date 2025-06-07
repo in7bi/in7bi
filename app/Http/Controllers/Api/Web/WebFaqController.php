@@ -9,7 +9,6 @@ class WebFaqController extends Controller
 {
     public function index()
     {
-        // Ambil maksimum 5 FAQ terbaru
         $faqs = Faq::latest()->take(5)->get();
 
         return response()->json([

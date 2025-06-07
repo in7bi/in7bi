@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    // Tampilkan semua services
     public function index()
     {
         $services = Service::with('category')->get();
@@ -16,7 +15,6 @@ class ServiceController extends Controller
         return response()->json($services);
     }
 
-    // Tampilkan detail berdasarkan ID
     public function show($id)
     {
         $service = Service::with('category')->find($id);
@@ -28,7 +26,6 @@ class ServiceController extends Controller
         return response()->json($service);
     }
 
-    // Simpan data baru
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -43,7 +40,6 @@ class ServiceController extends Controller
         return response()->json($service, 201);
     }
 
-    // Update data berdasarkan ID
     public function update(Request $request, $id)
     {
         $service = Service::find($id);
@@ -64,7 +60,6 @@ class ServiceController extends Controller
         return response()->json($service);
     }
 
-    // Hapus data berdasarkan ID
     public function destroy($id)
     {
         $service = Service::find($id);

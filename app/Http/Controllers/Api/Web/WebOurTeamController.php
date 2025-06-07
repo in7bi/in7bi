@@ -7,7 +7,6 @@ use App\Models\OurTeam;
 
 class WebOurTeamController extends Controller
 {
-    // Menampilkan semua anggota tim
     public function index()
     {
         $team = OurTeam::latest()->get();
@@ -15,7 +14,6 @@ class WebOurTeamController extends Controller
         return response()->json($team);
     }
 
-    // Menampilkan detail anggota tim berdasarkan ID
     public function show($id)
     {
         $member = OurTeam::find($id);

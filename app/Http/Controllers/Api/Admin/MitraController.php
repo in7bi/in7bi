@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class MitraController extends Controller
 {
-    // Tampilkan semua mitra
     public function index()
     {
         return response()->json(Mitra::all());
     }
 
-    // Tampilkan mitra berdasarkan ID
     public function show($id)
     {
         $mitra = Mitra::find($id);
@@ -27,7 +25,6 @@ class MitraController extends Controller
         return response()->json($mitra);
     }
 
-    // Simpan mitra baru
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -36,7 +33,6 @@ class MitraController extends Controller
             'mitra_logo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // Upload logo jika ada
         if ($request->hasFile('mitra_logo')) {
             $validated['mitra_logo'] = $request->file('mitra_logo')->store('uploads/mitra', 'public');
         }
@@ -46,7 +42,6 @@ class MitraController extends Controller
         return response()->json($mitra, 201);
     }
 
-    // Update mitra
     public function update(Request $request, $id)
     {
         $mitra = Mitra::find($id);
@@ -61,7 +56,6 @@ class MitraController extends Controller
             'mitra_logo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // Upload logo baru (hapus lama jika ada)
         if ($request->hasFile('mitra_logo')) {
             if ($mitra->mitra_logo && Storage::disk('public')->exists($mitra->mitra_logo)) {
                 Storage::disk('public')->delete($mitra->mitra_logo);
@@ -74,7 +68,6 @@ class MitraController extends Controller
         return response()->json($mitra);
     }
 
-    // Hapus mitra
     public function destroy($id)
     {
         $mitra = Mitra::find($id);

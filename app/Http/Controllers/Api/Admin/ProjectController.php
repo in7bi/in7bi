@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
-    // Tampilkan semua project
     public function index()
     {
         return response()->json(Project::all());
     }
 
-    // Tampilkan detail project berdasarkan ID
     public function show($id)
     {
         $project = Project::find($id);
@@ -27,7 +25,6 @@ class ProjectController extends Controller
         return response()->json($project);
     }
 
-    // Simpan project baru
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -51,7 +48,6 @@ class ProjectController extends Controller
         return response()->json($project, 201);
     }
 
-    // Update project
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
@@ -87,7 +83,6 @@ class ProjectController extends Controller
         return response()->json($project);
     }
 
-    // Hapus project
     public function destroy($id)
     {
         $project = Project::find($id);

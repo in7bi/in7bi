@@ -7,7 +7,6 @@ use App\Models\Service;
 
 class WebServiceController extends Controller
 {
-    // Menampilkan semua service beserta kategorinya
     public function index()
     {
         $services = Service::with('category')->latest()->get();
@@ -15,7 +14,6 @@ class WebServiceController extends Controller
         return response()->json($services);
     }
 
-    // Menampilkan detail service berdasarkan ID
     public function show($id)
     {
         $service = Service::with('category')->find($id);

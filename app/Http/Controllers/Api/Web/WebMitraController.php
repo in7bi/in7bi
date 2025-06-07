@@ -7,7 +7,6 @@ use App\Models\Mitra;
 
 class WebMitraController extends Controller
 {
-    // Menampilkan semua mitra
     public function index()
     {
         $mitras = Mitra::latest()->get();
@@ -15,7 +14,6 @@ class WebMitraController extends Controller
         return response()->json($mitras);
     }
 
-    // Menampilkan detail mitra berdasarkan ID
     public function show($id)
     {
         $mitra = Mitra::find($id);
