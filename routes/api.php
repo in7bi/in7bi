@@ -14,7 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Web\ApiWebSettingsController;
 use App\Http\Controllers\Api\Web\WebFaqController;
+use App\Http\Controllers\Api\Web\WebMitraController;
+use App\Http\Controllers\Api\Web\WebOurTeamController;
+use App\Http\Controllers\Api\Web\WebProjectController;
+use App\Http\Controllers\Api\Web\WebServiceController;
+use App\Http\Controllers\Api\Web\WebSocialController;
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
@@ -100,4 +106,16 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
+Route::get('/web/settings', [ApiWebSettingsController::class, 'index']);
+
 Route::get('/faqs', [WebFaqController::class, 'index']);
+Route::get('/web/social', [WebSocialController::class, 'index']);
+Route::get('/web/projects', [WebProjectController::class, 'index']);
+Route::get('/web/projects/{id}', [WebProjectController::class, 'show']);
+
+Route::get('/web/services', [WebServiceController::class, 'index']);
+Route::get('/web/services/{id}', [WebServiceController::class, 'show']);
+Route::get('/web/our-team', [WebOurTeamController::class, 'index']);
+Route::get('/web/our-team/{id}', [WebOurTeamController::class, 'show']);
+Route::get('/web/mitras', [WebMitraController::class, 'index']);
+Route::get('/web/mitras/{id}', [WebMitraController::class, 'show']);
