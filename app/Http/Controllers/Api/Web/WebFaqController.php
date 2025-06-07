@@ -13,7 +13,7 @@ class WebFaqController extends Controller
         $faqs = Faq::latest()->take(5)->get();
 
         return response()->json([
-            'data' => $faqs
+            'data' => $faqs,
         ]);
     }
 }

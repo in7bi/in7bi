@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OurTeam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\OurTeam;
 
 class OurTeamController extends Controller
 {
@@ -22,6 +22,7 @@ class OurTeamController extends Controller
         if (! $team) {
             return response()->json(['message' => 'Team member not found'], 404);
         }
+
         return response()->json($team);
     }
 
@@ -29,9 +30,9 @@ class OurTeamController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'         => 'required|string|max:255',
-            'position'     => 'required|string|max:255',
-            'linkedin'     => 'nullable|url|max:255',
+            'name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'linkedin' => 'nullable|url|max:255',
             'upload_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
@@ -40,6 +41,7 @@ class OurTeamController extends Controller
         }
 
         $team = OurTeam::create($validated);
+
         return response()->json($team, 201);
     }
 
@@ -52,9 +54,9 @@ class OurTeamController extends Controller
         }
 
         $validated = $request->validate([
-            'name'         => 'sometimes|required|string|max:255',
-            'position'     => 'sometimes|required|string|max:255',
-            'linkedin'     => 'nullable|url|max:255',
+            'name' => 'sometimes|required|string|max:255',
+            'position' => 'sometimes|required|string|max:255',
+            'linkedin' => 'nullable|url|max:255',
             'upload_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
@@ -66,6 +68,7 @@ class OurTeamController extends Controller
         }
 
         $team->update($validated);
+
         return response()->json($team);
     }
 
@@ -82,6 +85,7 @@ class OurTeamController extends Controller
         }
 
         $team->delete();
+
         return response()->json(['message' => 'Team member deleted successfully']);
     }
 }

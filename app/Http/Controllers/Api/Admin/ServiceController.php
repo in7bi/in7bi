@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Service;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -12,6 +12,7 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::with('category')->get();
+
         return response()->json($services);
     }
 

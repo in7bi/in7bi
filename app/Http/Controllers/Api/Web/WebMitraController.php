@@ -11,6 +11,7 @@ class WebMitraController extends Controller
     public function index()
     {
         $mitras = Mitra::latest()->get();
+
         return response()->json($mitras);
     }
 

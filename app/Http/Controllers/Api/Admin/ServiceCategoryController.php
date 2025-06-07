@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\ServiceCategory;
+use Illuminate\Http\Request;
 
 class ServiceCategoryController extends Controller
 {
@@ -12,6 +12,7 @@ class ServiceCategoryController extends Controller
     public function index()
     {
         $categories = ServiceCategory::all();
+
         return response()->json($categories);
     }
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\WebSettings;
+use Illuminate\Http\Request;
 
 class WebSettingsController extends Controller
 {
@@ -24,15 +24,15 @@ class WebSettingsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'headline'      => 'nullable|string|max:255',
-            'sub_headline'  => 'nullable|string|max:255',
-            'sub_materi'    => 'nullable|string',
-            'siapa_kami'    => 'nullable|string',
-            'visi'          => 'nullable|string',
-            'misi'          => 'nullable|string',
-            'phone'         => 'nullable|string|max:50',
-            'email'         => 'nullable|email|max:255',
-            'address'       => 'nullable|string',
+            'headline' => 'nullable|string|max:255',
+            'sub_headline' => 'nullable|string|max:255',
+            'sub_materi' => 'nullable|string',
+            'siapa_kami' => 'nullable|string',
+            'visi' => 'nullable|string',
+            'misi' => 'nullable|string',
+            'phone' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
+            'address' => 'nullable|string',
         ]);
 
         // Cek apakah sudah ada data
@@ -55,15 +55,15 @@ class WebSettingsController extends Controller
         }
 
         $validated = $request->validate([
-            'headline'      => 'nullable|string|max:255',
-            'sub_headline'  => 'nullable|string|max:255',
-            'sub_materi'    => 'nullable|string',
-            'siapa_kami'    => 'nullable|string',
-            'visi'          => 'nullable|string',
-            'misi'          => 'nullable|string',
-            'phone'         => 'nullable|string|max:50',
-            'email'         => 'nullable|email|max:255',
-            'address'       => 'nullable|string',
+            'headline' => 'nullable|string|max:255',
+            'sub_headline' => 'nullable|string|max:255',
+            'sub_materi' => 'nullable|string',
+            'siapa_kami' => 'nullable|string',
+            'visi' => 'nullable|string',
+            'misi' => 'nullable|string',
+            'phone' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
+            'address' => 'nullable|string',
         ]);
 
         $settings->update($validated);

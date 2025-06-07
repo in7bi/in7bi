@@ -11,6 +11,7 @@ class WebOurTeamController extends Controller
     public function index()
     {
         $team = OurTeam::latest()->get();
+
         return response()->json($team);
     }
 

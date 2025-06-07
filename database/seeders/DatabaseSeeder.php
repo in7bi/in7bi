@@ -6,8 +6,6 @@ use App\Models\Faq;
 use App\Models\InvestorRelation;
 use App\Models\Service;
 use App\Models\ServiceCategory;
-use App\Models\User;
-use App\Models\WebMetadata;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

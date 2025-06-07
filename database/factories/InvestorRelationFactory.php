@@ -12,9 +12,9 @@ class InvestorRelationFactory extends Factory
     public function definition(): array
     {
         return [
-            'headline'      => $this->faker->sentence(),
-            'sub_headline'  => $this->faker->sentence(),
-            'materi'        => $this->faker->paragraphs(3, true), // 3 paragraphs as a string
+            'headline' => $this->faker->sentence(),
+            'sub_headline' => $this->faker->sentence(),
+            'materi' => $this->faker->paragraphs(3, true), // 3 paragraphs as a string
         ];
     }
 }

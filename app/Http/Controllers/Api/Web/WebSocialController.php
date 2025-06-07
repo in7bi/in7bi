@@ -12,7 +12,7 @@ class WebSocialController extends Controller
     {
         $social = Social::first();
 
-        if (!$social) {
+        if (! $social) {
             return response()->json(['message' => 'Social settings not found'], 404);
         }
 

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mitra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Mitra;
 
 class MitraController extends Controller
 {
@@ -31,9 +31,9 @@ class MitraController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'mitra_name'     => 'required|string|max:255',
+            'mitra_name' => 'required|string|max:255',
             'mitra_subtitle' => 'nullable|string|max:255',
-            'mitra_logo'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'mitra_logo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         // Upload logo jika ada
@@ -42,6 +42,7 @@ class MitraController extends Controller
         }
 
         $mitra = Mitra::create($validated);
+
         return response()->json($mitra, 201);
     }
 
@@ -55,9 +56,9 @@ class MitraController extends Controller
         }
 
         $validated = $request->validate([
-            'mitra_name'     => 'sometimes|required|string|max:255',
+            'mitra_name' => 'sometimes|required|string|max:255',
             'mitra_subtitle' => 'nullable|string|max:255',
-            'mitra_logo'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'mitra_logo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         // Upload logo baru (hapus lama jika ada)
@@ -69,6 +70,7 @@ class MitraController extends Controller
         }
 
         $mitra->update($validated);
+
         return response()->json($mitra);
     }
 
@@ -86,6 +88,7 @@ class MitraController extends Controller
         }
 
         $mitra->delete();
+
         return response()->json(['message' => 'Mitra deleted successfully']);
     }
 }

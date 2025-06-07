@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Project;
 
 class ProjectController extends Controller
 {
@@ -31,11 +31,11 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'project_name'          => 'required|string|max:255',
-            'materi'                => 'required|string',
-            'category'              => 'required|string|max:255',
-            'pitch_deck'            => 'nullable|file|mimes:pdf,ppt,pptx|max:10240', // max 10MB
-            'upload_proposal_file'  => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'project_name' => 'required|string|max:255',
+            'materi' => 'required|string',
+            'category' => 'required|string|max:255',
+            'pitch_deck' => 'nullable|file|mimes:pdf,ppt,pptx|max:10240', // max 10MB
+            'upload_proposal_file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
         ]);
 
         if ($request->hasFile('pitch_deck')) {
@@ -61,11 +61,11 @@ class ProjectController extends Controller
         }
 
         $validated = $request->validate([
-            'project_name'          => 'sometimes|required|string|max:255',
-            'materi'                => 'sometimes|required|string',
-            'category'              => 'sometimes|required|string|max:255',
-            'pitch_deck'            => 'nullable|file|mimes:pdf,ppt,pptx|max:10240',
-            'upload_proposal_file'  => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'project_name' => 'sometimes|required|string|max:255',
+            'materi' => 'sometimes|required|string',
+            'category' => 'sometimes|required|string|max:255',
+            'pitch_deck' => 'nullable|file|mimes:pdf,ppt,pptx|max:10240',
+            'upload_proposal_file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
         ]);
 
         if ($request->hasFile('pitch_deck')) {

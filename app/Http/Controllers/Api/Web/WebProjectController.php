@@ -11,6 +11,7 @@ class WebProjectController extends Controller
     public function index()
     {
         $projects = Project::latest()->get();
+
         return response()->json($projects);
     }
 

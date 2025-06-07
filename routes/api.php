@@ -10,9 +10,6 @@ use App\Http\Controllers\Api\Admin\ServiceCategoryController;
 use App\Http\Controllers\Api\Admin\ServiceController;
 use App\Http\Controllers\Api\Admin\SocialController;
 use App\Http\Controllers\Api\Admin\WebSettingsController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Web\ApiWebSettingsController;
 use App\Http\Controllers\Api\Web\WebFaqController;
@@ -21,6 +18,7 @@ use App\Http\Controllers\Api\Web\WebOurTeamController;
 use App\Http\Controllers\Api\Web\WebProjectController;
 use App\Http\Controllers\Api\Web\WebServiceController;
 use App\Http\Controllers\Api\Web\WebSocialController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
@@ -35,7 +33,6 @@ Route::prefix('auth')->group(function () {
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
-
 
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     // Faq routes

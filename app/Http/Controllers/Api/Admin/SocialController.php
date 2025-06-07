@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Social;
+use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
@@ -12,9 +12,9 @@ class SocialController extends Controller
     public function createOrUpdate(Request $request)
     {
         $validated = $request->validate([
-            'facebook'  => 'nullable|url|max:255',
-            'twitter'   => 'nullable|url|max:255',
-            'linkedin'  => 'nullable|url|max:255',
+            'facebook' => 'nullable|url|max:255',
+            'twitter' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
             'instagram' => 'nullable|url|max:255',
         ]);
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Faq;
+use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
@@ -28,7 +28,7 @@ class FaqController extends Controller
     {
         $data = $request->validate([
             'question' => 'required|string|max:255',
-            'answer'   => 'required|string',
+            'answer' => 'required|string',
         ]);
 
         $faq = Faq::create($data);
@@ -46,7 +46,7 @@ class FaqController extends Controller
 
         $data = $request->validate([
             'question' => 'sometimes|required|string|max:255',
-            'answer'   => 'sometimes|required|string',
+            'answer' => 'sometimes|required|string',
         ]);
 
         $faq->update($data);
