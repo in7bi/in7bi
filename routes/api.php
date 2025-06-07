@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Admin\SocialController;
 use App\Http\Controllers\Api\Admin\WebSettingsController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Web\ApiWebSettingsController;
+use App\Http\Controllers\Api\Web\LandingPageController;
 use App\Http\Controllers\Api\Web\WebFaqController;
 use App\Http\Controllers\Api\Web\WebMitraController;
 use App\Http\Controllers\Api\Web\WebOurTeamController;
@@ -102,6 +103,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
+Route::get('/web/home', [LandingPageController::class, 'index']);
 Route::get('/web/settings', [ApiWebSettingsController::class, 'index']);
 
 Route::get('/faqs', [WebFaqController::class, 'index']);
