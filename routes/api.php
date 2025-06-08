@@ -45,9 +45,8 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/web-settings', [WebSettingsController::class, 'index']);
-    Route::post('/web-settings', [WebSettingsController::class, 'store']);
-    Route::put('/web-settings/{id}', [WebSettingsController::class, 'update']);
-    Route::delete('/web-settings/{id}', [WebSettingsController::class, 'destroy']);
+    Route::post('/web-settings', [WebSettingsController::class, 'storeOrUpdate']);
+    Route::delete('/web-settings', [WebSettingsController::class, 'destroy']);
 });
 
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
@@ -106,7 +105,8 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 Route::get('/web/home', [LandingPageController::class, 'index']);
 Route::get('/web/settings', [ApiWebSettingsController::class, 'index']);
 
-Route::get('/faqs', [WebFaqController::class, 'index']);
+Route::get('/web/faqs', [WebFaqController::class, 'index']);
+Route::get('/web/faqs/search', [WebFaqController::class, 'search']);
 Route::get('/web/social', [WebSocialController::class, 'index']);
 Route::get('/web/projects', [WebProjectController::class, 'index']);
 Route::get('/web/projects/{id}', [WebProjectController::class, 'show']);

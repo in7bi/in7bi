@@ -9,7 +9,7 @@ class WebServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::with('category')->latest()->get();
+        $services = Service::with('category')->paginate(10);
 
         return response()->json($services);
     }
