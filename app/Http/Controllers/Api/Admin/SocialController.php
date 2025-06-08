@@ -17,12 +17,17 @@ class SocialController extends Controller
             'instagram' => 'nullable|url|max:255',
         ]);
 
+        // Ambil data pertama (satu-satunya)
         $social = Social::first();
 
         if ($social) {
+            // Hanya update jika data sudah ada
             $social->update($validated);
         } else {
-            $social = Social::create($validated);
+            // Jika tidak ada data sama sekali, baru create
+            // Pastikan hanya satu data dibuat
+            $social = new Social($validated);
+            $social->save();
         }
 
         return response()->json($social);

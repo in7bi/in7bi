@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Faq::all());
+        $perPage = $request->get('per_page', 15);
+        $faqs = Faq::paginate($perPage);
+        return response()->json($faqs);
     }
 
     public function show($id)

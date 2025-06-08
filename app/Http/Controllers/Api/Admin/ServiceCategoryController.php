@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class ServiceCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = ServiceCategory::all();
+        $perPage = $request->get('per_page', 15);
+        $categories = ServiceCategory::paginate($perPage);
 
         return response()->json($categories);
     }
