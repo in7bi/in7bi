@@ -20,10 +20,14 @@ class RolePermissionController extends Controller
     public function createRole(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:roles',
+            'name' => 'required|string|unique:roles,name',
         ]);
 
-        $role = Role::create(['name' => $validated['name']]);
+        $role = Role::create([
+            'name' => $validated['name'],
+            'guard_name' => 'web',
+        ]);
+
         return response()->json($role, 201);
     }
 
@@ -59,10 +63,14 @@ class RolePermissionController extends Controller
     public function createPermission(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:permissions',
+            'name' => 'required|string|unique:permissions,name',
         ]);
 
-        $permission = Permission::create(['name' => $validated['name']]);
+        $permission = Permission::create([
+            'name' => $validated['name'],
+            'guard_name' => 'web',
+        ]);
+
         return response()->json($permission, 201);
     }
 
@@ -98,7 +106,7 @@ class RolePermissionController extends Controller
         ]);
 
         $user = User::findOrFail($validated['user_id']);
-        $user->assignRole($validated['role']);
+        $user->assignRole($validated['role']); // guard 'web' akan digunakan otomatis jika config sudah benar
 
         return response()->json([
             'message' => 'Role assigned successfully.',
