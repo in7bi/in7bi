@@ -10,6 +10,23 @@ use App\Models\RoleRequest;
 
 class ProfileController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'email_verified' => !is_null($user->email_verified_at),
+                'roles' => $user->getRoleNames(),
+                'permissions' => $user->getAllPermissions()->pluck('name'),
+            ],
+        ]);
+    }
+    
     public function update(Request $request)
     {
         $user = $request->user();
