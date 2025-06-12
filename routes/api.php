@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\Web\WebOurTeamController;
 use App\Http\Controllers\Api\Web\WebProjectController;
 use App\Http\Controllers\Api\Web\WebServiceController;
 use App\Http\Controllers\Api\Web\WebSocialController;
+use App\Http\Controllers\Api\Admin\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -103,8 +104,23 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
-Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
-    Route::post('/profile', [ProfileController::class, 'update']);
+Route::prefix('admin')->middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    Route::get('/roles', [RolePermissionController::class, 'getRoles']);
+    Route::post('/roles', [RolePermissionController::class, 'createRole']);
+    Route::put('/roles/{id}', [RolePermissionController::class, 'updateRole']);
+    Route::delete('/roles/{id}', [RolePermissionController::class, 'deleteRole']);
+
+    Route::get('/permissions', [RolePermissionController::class, 'getPermissions']);
+    Route::post('/permissions', [RolePermissionController::class, 'createPermission']);
+    Route::put('/permissions/{id}', [RolePermissionController::class, 'updatePermission']);
+    Route::delete('/permissions/{id}', [RolePermissionController::class, 'deletePermission']);
+
+    Route::post('/assign-role', [RolePermissionController::class, 'assignRoleToUser']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::post('/profile/request-role', [ProfileController::class, 'requestRoleAssignment']);
 });
 
 Route::get('/web/home', [LandingPageController::class, 'index']);
