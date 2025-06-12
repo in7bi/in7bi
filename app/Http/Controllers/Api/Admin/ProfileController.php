@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\RoleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -46,18 +47,28 @@ class ProfileController extends Controller
 
     public function requestRoleAssignment(Request $request)
     {
+        $user = $request->user();
+
         $validated = $request->validate([
             'role' => 'required|string|exists:roles,name',
         ]);
 
-        // Misalnya, kamu simpan dulu sebagai log atau kirim ke admin untuk persetujuan manual
-        // Untuk demo, langsung assign role (tapi bisa kamu ubah untuk sistem persetujuan)
-        $user = $request->user();
-        $user->assignRole($validated['role']);
+        // Cek apakah sudah ada request yang pending
+        $existing = RoleRequest::where('user_id', $user->id)->where('status', 'pending')->first();
+
+        if ($existing) {
+            return response()->json(['message' => 'You already have a pending request.'], 409);
+        }
+
+        $requestRole = RoleRequest::create([
+            'user_id' => $user->id,
+            'requested_role' => $validated['role'],
+            'status' => 'pending',
+        ]);
 
         return response()->json([
-            'message' => 'Role assigned successfully.',
-            'role' => $validated['role'],
+            'message' => 'Role request submitted.',
+            'request' => $requestRole,
         ]);
     }
 }

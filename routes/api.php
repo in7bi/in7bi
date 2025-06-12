@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\Web\WebProjectController;
 use App\Http\Controllers\Api\Web\WebServiceController;
 use App\Http\Controllers\Api\Web\WebSocialController;
 use App\Http\Controllers\Api\Admin\RolePermissionController;
+use App\Http\Controllers\Api\Admin\RoleRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -116,6 +117,12 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::delete('/permissions/{id}', [RolePermissionController::class, 'deletePermission']);
 
     Route::post('/assign-role', [RolePermissionController::class, 'assignRoleToUser']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    Route::get('/role-requests', [RoleRequestController::class, 'index']);
+    Route::post('/role-requests/{id}/approve', [RoleRequestController::class, 'approve']);
+    Route::post('/role-requests/{id}/reject', [RoleRequestController::class, 'reject']);
 });
 
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
