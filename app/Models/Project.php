@@ -15,5 +15,6 @@ class Project extends Model
         'category',
         'pitch_deck',
         'upload_proposal_file',
+        'upload_image_file'
     ];
 }
