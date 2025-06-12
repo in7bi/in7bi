@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Admin\FaqController;
 use App\Http\Controllers\Api\Admin\InvestorRelationController;
 use App\Http\Controllers\Api\Admin\MitraController;
 use App\Http\Controllers\Api\Admin\OurTeamController;
+use App\Http\Controllers\Api\Admin\ProfileController;
 use App\Http\Controllers\Api\Admin\ProjectController;
 use App\Http\Controllers\Api\Admin\ServiceCategoryController;
 use App\Http\Controllers\Api\Admin\ServiceController;
@@ -100,6 +101,10 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::post('/services', [ServiceController::class, 'store']);
     Route::post('/services/{id}', [ServiceController::class, 'update']);
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
+});
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+    Route::post('/profile', [ProfileController::class, 'update']);
 });
 
 Route::get('/web/home', [LandingPageController::class, 'index']);
