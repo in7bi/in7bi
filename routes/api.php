@@ -104,7 +104,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::delete('/services/{id}', [ServiceController::class, 'destroy']);
 });
 
-Route::prefix('admin')->middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::get('/roles', [RolePermissionController::class, 'getRoles']);
     Route::post('/roles', [RolePermissionController::class, 'createRole']);
     Route::put('/roles/{id}', [RolePermissionController::class, 'updateRole']);
