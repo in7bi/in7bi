@@ -33,6 +33,7 @@ class ProjectController extends Controller
             'category' => 'required|string|max:255',
             'pitch_deck' => 'nullable|file|mimes:pdf,ppt,pptx|max:10240', // max 10MB
             'upload_proposal_file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'upload_image_file' => 'nullable|file|image|max:2048', // max 2MB
         ]);
 
         if ($request->hasFile('pitch_deck')) {
@@ -41,6 +42,10 @@ class ProjectController extends Controller
 
         if ($request->hasFile('upload_proposal_file')) {
             $validated['upload_proposal_file'] = $request->file('upload_proposal_file')->store('uploads/projects/proposal', 'public');
+        }
+
+        if ($request->hasFile('upload_image_file')) {
+            $validated['upload_image_file'] = $request->file('upload_image_file')->store('uploads/projects/images', 'public');
         }
 
         $project = Project::create($validated);
@@ -62,6 +67,7 @@ class ProjectController extends Controller
             'category' => 'sometimes|required|string|max:255',
             'pitch_deck' => 'nullable|file|mimes:pdf,ppt,pptx|max:10240',
             'upload_proposal_file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'upload_image_file' => 'nullable|file|image|max:2048',
         ]);
 
         if ($request->hasFile('pitch_deck')) {
@@ -76,6 +82,13 @@ class ProjectController extends Controller
                 Storage::disk('public')->delete($project->upload_proposal_file);
             }
             $validated['upload_proposal_file'] = $request->file('upload_proposal_file')->store('uploads/projects/proposal', 'public');
+        }
+
+        if ($request->hasFile('upload_image_file')) {
+            if ($project->upload_image_file && Storage::disk('public')->exists($project->upload_image_file)) {
+                Storage::disk('public')->delete($project->upload_image_file);
+            }
+            $validated['upload_image_file'] = $request->file('upload_image_file')->store('uploads/projects/images', 'public');
         }
 
         $project->update($validated);
