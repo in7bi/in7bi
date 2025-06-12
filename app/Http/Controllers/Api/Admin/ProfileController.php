@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
@@ -15,11 +16,7 @@ class ProfileController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignore($user->id),
-            ],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
@@ -44,6 +41,23 @@ class ProfileController extends Controller
                 'email' => $user->email,
                 'email_verified' => !is_null($user->email_verified_at),
             ],
+        ]);
+    }
+
+    public function requestRoleAssignment(Request $request)
+    {
+        $validated = $request->validate([
+            'role' => 'required|string|exists:roles,name',
+        ]);
+
+        // Misalnya, kamu simpan dulu sebagai log atau kirim ke admin untuk persetujuan manual
+        // Untuk demo, langsung assign role (tapi bisa kamu ubah untuk sistem persetujuan)
+        $user = $request->user();
+        $user->assignRole($validated['role']);
+
+        return response()->json([
+            'message' => 'Role assigned successfully.',
+            'role' => $validated['role'],
         ]);
     }
 }
