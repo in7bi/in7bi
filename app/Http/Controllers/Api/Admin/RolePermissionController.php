@@ -106,12 +106,19 @@ class RolePermissionController extends Controller
         ]);
 
         $user = User::findOrFail($validated['user_id']);
-        $user->assignRole($validated['role']); // guard 'web' akan digunakan otomatis jika config sudah benar
+        $user->assignRole($validated['role']);
 
         return response()->json([
             'message' => 'Role assigned successfully.',
             'user' => $user->only(['id', 'name', 'email']),
             'role' => $validated['role'],
         ]);
+    }
+
+    // Get all users (for listing in a table)
+    public function getUsers()
+    {
+        $users = User::all();
+        return response()->json($users);
     }
 }

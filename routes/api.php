@@ -122,6 +122,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::delete('/permissions/{id}', [RolePermissionController::class, 'deletePermission']);
 
     Route::post('/assign-role', [RolePermissionController::class, 'assignRoleToUser']);
+    Route::get('/user-roles', [RolePermissionController::class, 'getUserRoles']);
 });
 
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
