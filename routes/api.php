@@ -123,6 +123,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 
     Route::post('/assign-role', [RolePermissionController::class, 'assignRoleToUser']);
     Route::get('/user-roles', [RolePermissionController::class, 'getUserRoles']);
+    Route::post('/revoke-role', [RolePermissionController::class, 'revokeRoleFromUser']);
 });
 
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
