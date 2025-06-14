@@ -116,9 +116,18 @@ class RolePermissionController extends Controller
     }
 
     // Get all users (for listing in a table)
-    public function getUsers()
+    public function getUserRoles()
     {
-        $users = User::all();
+        $users = User::all()->map(function ($user) {
+            $roles = $user->roles->pluck('name');
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'roles' => $roles,
+            ];
+        });
+
         return response()->json($users);
     }
 }
