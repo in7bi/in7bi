@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\Web\ApiWebSettingsController;
 use App\Http\Controllers\Api\Web\FeedbackProductController;
 use App\Http\Controllers\Api\Web\LandingPageController;
 use App\Http\Controllers\Api\Web\WebFaqController;
+use App\Http\Controllers\Api\Web\WebMarketPlaceController;
 use App\Http\Controllers\Api\Web\WebMitraController;
 use App\Http\Controllers\Api\Web\WebOurTeamController;
 use App\Http\Controllers\Api\Web\WebProjectController;
@@ -175,6 +176,13 @@ Route::middleware(['auth:sanctum'])->prefix('web')->group(function () {
     Route::post('/feedbacks', [FeedbackProductController::class, 'store']);
     Route::get('/feedbacks/{id}', [FeedbackProductController::class, 'show']);
     Route::delete('/feedbacks/{id}', [FeedbackProductController::class, 'destroy']);
+});
+
+Route::prefix('web/marketplace')->group(function () {
+    Route::get('/products', [WebMarketPlaceController::class, 'products']);
+    Route::get('/products/{id}', [WebMarketPlaceController::class, 'productDetail']);
+    Route::get('/products/{id}/specs', [WebMarketPlaceController::class, 'productSpecs']);
+    Route::get('/categories', [WebMarketPlaceController::class, 'categories']);
 });
 
 Route::get('/web/home', [LandingPageController::class, 'index']);
