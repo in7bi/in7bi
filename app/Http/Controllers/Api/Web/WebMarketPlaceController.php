@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductSpecs;
+use App\Http\Resources\ProductResource;
 
 class WebMarketPlaceController extends Controller
 {
@@ -13,22 +14,14 @@ class WebMarketPlaceController extends Controller
     {
         $products = Product::with(['category', 'shop', 'specs'])
             ->latest()
-            ->get()
-            ->makeHidden(['user_id', 'shop_id', 'product_category_id']);
-
-        return response()->json($products);
+            ->get();
+        return ProductResource::collection($products);
     }
 
     public function productDetail($id)
     {
-        $product = Product::with(['category', 'shop'])->findOrFail($id);
-
-        $specs = ProductSpecs::where('product_id', $product->id)->select('keywords', 'keywords_value')->get();
-
-        $product->setAttribute('specs', $specs);
-        $product->makeHidden(['user_id', 'shop_id', 'product_category_id']);
-
-        return response()->json($product);
+        $product = Product::with(['category', 'shop', 'specs'])->findOrFail($id);
+        return new ProductResource($product);
     }
 
     public function productSpecs($product_id)
