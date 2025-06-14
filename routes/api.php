@@ -22,6 +22,11 @@ use App\Http\Controllers\Api\Web\WebServiceController;
 use App\Http\Controllers\Api\Web\WebSocialController;
 use App\Http\Controllers\Api\Admin\RolePermissionController;
 use App\Http\Controllers\Api\Admin\RoleRequestController;
+use App\Http\Controllers\Api\Marketplace\Admin\ProductCategoryController;
+use App\Http\Controllers\Api\Marketplace\Admin\ProductController;
+use App\Http\Controllers\Api\Marketplace\Admin\ShopController;
+use App\Http\Controllers\Api\Web\FeedbackProductController;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -129,6 +134,37 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::post('/profile/request-role', [ProfileController::class, 'requestRoleAssignment']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('admin/marketplace')->group(function () {
+    Route::get('/product-categories', [ProductCategoryController::class, 'index']);
+    Route::post('/product-categories', [ProductCategoryController::class, 'store']);
+    Route::get('/product-categories/{id}', [ProductCategoryController::class, 'show']);
+    Route::put('/product-categories/{id}', [ProductCategoryController::class, 'update']);
+    Route::delete('/product-categories/{id}', [ProductCategoryController::class, 'destroy']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('admin/marketplace')->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/{id}', [ProductController::class, 'show']);
+    Route::put('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('admin/marketplace')->group(function () {
+    Route::get('/shops', [ShopController::class, 'index']);
+    Route::post('/shops', [ShopController::class, 'store']);
+    Route::get('/shops/{id}', [ShopController::class, 'show']);
+    Route::put('/shops/{id}', [ShopController::class, 'update']);
+    Route::delete('/shops/{id}', [ShopController::class, 'destroy']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('web')->group(function () {
+    Route::get('/feedbacks', [FeedbackProductController::class, 'index']);
+    Route::post('/feedbacks', [FeedbackProductController::class, 'store']);
+    Route::get('/feedbacks/{id}', [FeedbackProductController::class, 'show']);
+    Route::delete('/feedbacks/{id}', [FeedbackProductController::class, 'destroy']);
 });
 
 Route::get('/web/home', [LandingPageController::class, 'index']);
