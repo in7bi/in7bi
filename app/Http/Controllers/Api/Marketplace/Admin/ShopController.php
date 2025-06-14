@@ -11,6 +11,7 @@ class ShopController extends Controller
     public function index()
     {
         $shops = Shop::with('user')->get();
+
         return response()->json($shops);
     }
 
@@ -22,12 +23,14 @@ class ShopController extends Controller
         ]);
 
         $shop = Shop::create($validated);
+
         return response()->json($shop, 201);
     }
 
     public function show($id)
     {
         $shop = Shop::with('user')->findOrFail($id);
+
         return response()->json($shop);
     }
 
@@ -41,6 +44,7 @@ class ShopController extends Controller
         ]);
 
         $shop->update($validated);
+
         return response()->json($shop);
     }
 

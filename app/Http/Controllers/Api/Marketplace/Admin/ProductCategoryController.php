@@ -11,6 +11,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         $categories = ProductCategory::all();
+
         return response()->json($categories);
     }
 
@@ -29,6 +30,7 @@ class ProductCategoryController extends Controller
     public function show($id)
     {
         $category = ProductCategory::findOrFail($id);
+
         return response()->json($category);
     }
 
@@ -37,7 +39,7 @@ class ProductCategoryController extends Controller
         $category = ProductCategory::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:product_categories,name,' . $category->id,
+            'name' => 'required|string|max:255|unique:product_categories,name,'.$category->id,
             'description' => 'nullable|string',
         ]);
 

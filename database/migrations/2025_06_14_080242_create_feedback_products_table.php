@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('feedback_products', function (Blueprint $table) {
@@ -15,7 +16,7 @@ return new class extends Migration {
 
             $table->tinyInteger('rating')->unsigned()->check('rating >= 1 and rating <= 5');
             $table->text('description')->nullable();
-            
+
             $table->enum('feedback_category', ['Shipping', 'Services', 'Product']);
             $table->string('upload_photo')->nullable();
 
