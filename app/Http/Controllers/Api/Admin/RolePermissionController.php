@@ -130,4 +130,22 @@ class RolePermissionController extends Controller
 
         return response()->json($users);
     }
+
+    //revoke role from user
+    public function revokeRoleFromUser(Request $request)
+    {
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'role' => 'required|exists:roles,name',
+        ]);
+
+        $user = User::findOrFail($validated['user_id']);
+        $user->removeRole($validated['role']);
+
+        return response()->json([
+            'message' => 'Role revoked successfully.',
+            'user' => $user->only(['id', 'name', 'email']),
+            'role' => $validated['role'],
+        ]);
+    }
 }
