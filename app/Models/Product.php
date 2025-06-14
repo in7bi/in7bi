@@ -9,16 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'product_sku',
-        'product_name',
-        'product_category_id',
-        'product_description',
-        'product_price',
-        'product_photo',
-        'user_id',
-        'shop_id',
-    ];
+    protected $fillable = ['product_sku', 'product_name', 'product_category_id', 'product_description', 'product_price', 'product_photo', 'user_id', 'shop_id'];
 
     public function category()
     {
@@ -33,5 +24,10 @@ class Product extends Model
     public function shop()
     {
         return $this->belongsTo(Shop::class);
+    }
+
+    public function specs()
+    {
+        return $this->hasMany(ProductSpecs::class);
     }
 }
