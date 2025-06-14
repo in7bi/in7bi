@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolePermissionController extends Controller
 {
@@ -36,7 +36,7 @@ class RolePermissionController extends Controller
         $role = Role::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|unique:roles,name,' . $role->id,
+            'name' => 'required|string|unique:roles,name,'.$role->id,
         ]);
 
         $role->name = $validated['name'];
@@ -79,7 +79,7 @@ class RolePermissionController extends Controller
         $permission = Permission::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|unique:permissions,name,' . $permission->id,
+            'name' => 'required|string|unique:permissions,name,'.$permission->id,
         ]);
 
         $permission->name = $validated['name'];
@@ -120,6 +120,7 @@ class RolePermissionController extends Controller
     {
         $users = User::all()->map(function ($user) {
             $roles = $user->roles->pluck('name');
+
             return [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -131,7 +132,7 @@ class RolePermissionController extends Controller
         return response()->json($users);
     }
 
-    //revoke role from user
+    // revoke role from user
     public function revokeRoleFromUser(Request $request)
     {
         $validated = $request->validate([

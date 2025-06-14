@@ -12,6 +12,7 @@ class FaqController extends Controller
     {
         $perPage = $request->get('per_page', 15);
         $faqs = Faq::paginate($perPage);
+
         return response()->json($faqs);
     }
 

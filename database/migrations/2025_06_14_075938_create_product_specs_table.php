@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('product_specs', function (Blueprint $table) {
@@ -17,14 +18,14 @@ return new class extends Migration {
 
             // Foreign Keys
             $table->foreign('product_id')
-                  ->references('id')
-                  ->on('products')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
 
             $table->foreign('shop_id')
-                  ->references('id')
-                  ->on('shops')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('shops')
+                ->onDelete('cascade');
         });
     }
 
