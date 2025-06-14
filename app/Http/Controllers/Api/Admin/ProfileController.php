@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\RoleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use App\Models\RoleRequest;
 
 class ProfileController extends Controller
 {
-
     public function index(Request $request)
     {
         $user = $request->user();
@@ -20,13 +19,13 @@ class ProfileController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'email_verified' => !is_null($user->email_verified_at),
+                'email_verified' => ! is_null($user->email_verified_at),
                 'roles' => $user->getRoleNames(),
                 'permissions' => $user->getAllPermissions()->pluck('name'),
             ],
         ]);
     }
-    
+
     public function update(Request $request)
     {
         $user = $request->user();
@@ -48,7 +47,7 @@ class ProfileController extends Controller
             $user->email_verified_at = null;
         }
 
-        if (!empty($validated['password'])) {
+        if (! empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
 
@@ -59,7 +58,7 @@ class ProfileController extends Controller
             'user' => [
                 'name' => $user->name,
                 'email' => $user->email,
-                'email_verified' => !is_null($user->email_verified_at),
+                'email_verified' => ! is_null($user->email_verified_at),
                 'roles' => $user->getRoleNames(), // Tampilkan role aktif
             ],
         ]);

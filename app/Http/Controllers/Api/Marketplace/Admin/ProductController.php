@@ -12,6 +12,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with(['category', 'user', 'shop'])->get();
+
         return response()->json($products);
     }
 
@@ -33,12 +34,14 @@ class ProductController extends Controller
         }
 
         $product = Product::create($validated);
+
         return response()->json($product, 201);
     }
 
     public function show($id)
     {
         $product = Product::with(['category', 'user', 'shop'])->findOrFail($id);
+
         return response()->json($product);
     }
 
@@ -47,7 +50,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $validated = $request->validate([
-            'product_sku' => 'required|string|unique:products,product_sku,' . $product->id,
+            'product_sku' => 'required|string|unique:products,product_sku,'.$product->id,
             'product_name' => 'required|string|max:255',
             'product_category_id' => 'required|exists:product_categories,id',
             'product_description' => 'nullable|string',
@@ -67,6 +70,7 @@ class ProductController extends Controller
         }
 
         $product->update($validated);
+
         return response()->json($product);
     }
 
@@ -80,6 +84,7 @@ class ProductController extends Controller
         }
 
         $product->delete();
+
         return response()->json(['message' => 'Product deleted successfully.']);
     }
 }

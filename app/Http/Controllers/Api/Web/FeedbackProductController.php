@@ -12,6 +12,7 @@ class FeedbackProductController extends Controller
     public function index()
     {
         $feedback = FeedbackProduct::with(['product', 'user'])->latest()->get();
+
         return response()->json($feedback);
     }
 
@@ -33,12 +34,14 @@ class FeedbackProductController extends Controller
         }
 
         $feedback = FeedbackProduct::create($validated);
+
         return response()->json($feedback, 201);
     }
 
     public function show($id)
     {
         $feedback = FeedbackProduct::with(['product', 'user'])->findOrFail($id);
+
         return response()->json($feedback);
     }
 

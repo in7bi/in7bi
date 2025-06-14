@@ -7,12 +7,19 @@ use App\Http\Controllers\Api\Admin\MitraController;
 use App\Http\Controllers\Api\Admin\OurTeamController;
 use App\Http\Controllers\Api\Admin\ProfileController;
 use App\Http\Controllers\Api\Admin\ProjectController;
+use App\Http\Controllers\Api\Admin\RolePermissionController;
+use App\Http\Controllers\Api\Admin\RoleRequestController;
 use App\Http\Controllers\Api\Admin\ServiceCategoryController;
 use App\Http\Controllers\Api\Admin\ServiceController;
 use App\Http\Controllers\Api\Admin\SocialController;
 use App\Http\Controllers\Api\Admin\WebSettingsController;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Marketplace\Admin\ProductCategoryController;
+use App\Http\Controllers\Api\Marketplace\Admin\ProductController;
+use App\Http\Controllers\Api\Marketplace\Admin\ProductSpecsController;
+use App\Http\Controllers\Api\Marketplace\Admin\ShopController;
 use App\Http\Controllers\Api\Web\ApiWebSettingsController;
+use App\Http\Controllers\Api\Web\FeedbackProductController;
 use App\Http\Controllers\Api\Web\LandingPageController;
 use App\Http\Controllers\Api\Web\WebFaqController;
 use App\Http\Controllers\Api\Web\WebMitraController;
@@ -20,13 +27,6 @@ use App\Http\Controllers\Api\Web\WebOurTeamController;
 use App\Http\Controllers\Api\Web\WebProjectController;
 use App\Http\Controllers\Api\Web\WebServiceController;
 use App\Http\Controllers\Api\Web\WebSocialController;
-use App\Http\Controllers\Api\Admin\RolePermissionController;
-use App\Http\Controllers\Api\Admin\RoleRequestController;
-use App\Http\Controllers\Api\Marketplace\Admin\ProductCategoryController;
-use App\Http\Controllers\Api\Marketplace\Admin\ProductController;
-use App\Http\Controllers\Api\Marketplace\Admin\ShopController;
-use App\Http\Controllers\Api\Web\FeedbackProductController;
-use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
@@ -152,6 +152,14 @@ Route::middleware(['auth:sanctum'])->prefix('admin/marketplace')->group(function
     Route::get('/products/{id}', [ProductController::class, 'show']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('marketplace')->group(function () {
+    Route::get('/product-specs', [ProductSpecsController::class, 'index']);
+    Route::post('/product-specs', [ProductSpecsController::class, 'store']);
+    Route::get('/product-specs/{id}', [ProductSpecsController::class, 'show']);
+    Route::put('/product-specs/{id}', [ProductSpecsController::class, 'update']);
+    Route::delete('/product-specs/{id}', [ProductSpecsController::class, 'destroy']);
 });
 
 Route::middleware(['auth:sanctum'])->prefix('admin/marketplace')->group(function () {

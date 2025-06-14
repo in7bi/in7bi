@@ -20,8 +20,8 @@ class WebFaqController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $faqs = Faq::where('question', 'like', '%' . $query . '%')
-            ->orWhere('answer', 'like', '%' . $query . '%')
+        $faqs = Faq::where('question', 'like', '%'.$query.'%')
+            ->orWhere('answer', 'like', '%'.$query.'%')
             ->latest()
             ->get();
 
