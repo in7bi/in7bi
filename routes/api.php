@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Marketplace\Admin\ProductCategoryController;
 use App\Http\Controllers\Api\Marketplace\Admin\ProductController;
 use App\Http\Controllers\Api\Marketplace\Admin\ProductSpecsController;
 use App\Http\Controllers\Api\Marketplace\Admin\ShopController;
+use App\Http\Controllers\Api\Marketplace\Admin\ShopDetailController;
 use App\Http\Controllers\Api\Web\ApiWebSettingsController;
 use App\Http\Controllers\Api\Web\FeedbackProductController;
 use App\Http\Controllers\Api\Web\LandingPageController;
@@ -171,7 +172,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin/marketplace')->group(function
     Route::delete('/shops/{id}', [ShopController::class, 'destroy']);
 });
 
-Route::middleware(['auth:sanctum'])->prefix('web')->group(function () {
+Route::prefix('web/marketplace')->group(function () {
     Route::get('/feedbacks', [FeedbackProductController::class, 'index']);
     Route::post('/feedbacks', [FeedbackProductController::class, 'store']);
     Route::get('/feedbacks/{id}', [FeedbackProductController::class, 'show']);
@@ -184,6 +185,12 @@ Route::prefix('web/marketplace')->group(function () {
     Route::get('/products/{id}/specs', [WebMarketPlaceController::class, 'productSpecs']);
     Route::get('/categories', [WebMarketPlaceController::class, 'categories']);
 });
+
+Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    Route::get('/shop-detail', [ShopDetailController::class, 'show']);
+    Route::post('/shop-detail', [ShopDetailController::class, 'storeOrUpdate']);
+});
+
 
 Route::get('/web/home', [LandingPageController::class, 'index']);
 Route::get('/web/settings', [ApiWebSettingsController::class, 'index']);
