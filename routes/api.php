@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Admin\ServiceController;
 use App\Http\Controllers\Api\Admin\SocialController;
 use App\Http\Controllers\Api\Admin\WebSettingsController;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Investor\Admin\InvestorDetailController;
 use App\Http\Controllers\Api\Marketplace\Admin\ProductCategoryController;
 use App\Http\Controllers\Api\Marketplace\Admin\ProductController;
 use App\Http\Controllers\Api\Marketplace\Admin\ProductSpecsController;
@@ -189,6 +190,11 @@ Route::prefix('web/marketplace')->group(function () {
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::get('/shop-detail', [ShopDetailController::class, 'show']);
     Route::post('/shop-detail', [ShopDetailController::class, 'storeOrUpdate']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    Route::get('/investor-detail', [InvestorDetailController::class, 'show']);
+    Route::post('/investor-detail', [InvestorDetailController::class, 'storeOrUpdate']);
 });
 
 
